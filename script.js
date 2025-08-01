@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const N8N_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook-test/867e19c8-5689-400a-b595-767f4ec31b3e'; // DŮLEŽITÉ: Doplňte později!
+    const N8N_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook/867e19c8-5689-400a-b595-767f4ec31b3e'; // DŮLEŽITÉ: Doplňte později!
 
     const form = document.getElementById('household-form');
     const membersContainer = document.getElementById('members-container');
