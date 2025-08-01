@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const N8N_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook/867e19c8-5689-400a-b595-767f4ec31b3e'; // DŮLEŽITÉ: Doplňte později!
+    // DŮLEŽITÉ: Vložte sem vaši produkční URL z N8N workflow pro formulář!
+    const N8N_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook/867e19c8-5689-400a-b595-767f4ec31b3e'; 
 
     const form = document.getElementById('household-form');
     const membersContainer = document.getElementById('members-container');
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Krok 2: Zpracování a odeslání formuláře
     form.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Zabráníme klasickému odeslání formuláře
+        event.preventDefault(); 
 
         const data = {
             messenger_psid: psidInput.value,
@@ -50,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const member = {
                 member_type: div.querySelector('[name=member_type]').value,
                 age: div.querySelector('[name=age]').value ? parseInt(div.querySelector('[name=age]').value) : null,
-                // Rozdělí text na pole a odstraní prázdné místo kolem
                 restrictions: div.querySelector('[name=restrictions]').value.split(',').map(s => s.trim()).filter(s => s)
             };
             data.members.push(member);
@@ -63,11 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
-            // Krok 3: Zavření WebView po úspěšném odeslání
-            window.close();
+            
+            alert('Data byla úspěšně odeslána!');
+            window.close(); // Můžeme to zkusit znovu zapnout
+
         } catch (error) {
+            // Zobrazíme detailní chybu pro ladění
+            alert(`Detailní chyba: ${error.message}\n\nURL: ${N8N_WEBHOOK_URL}`);
             console.error('Chyba při odesílání dat:', error);
-            alert('Nastala chyba při ukládání. Zkuste to prosím znovu.');
         }
     });
 });
