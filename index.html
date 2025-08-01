@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nastavení Domácnosti</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .member { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+        input, select, button { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+        button { background-color: #0084ff; color: white; border: none; cursor: pointer; }
+        #add-member { background-color: #4CAF50; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Nastavení Domácnosti</h1>
+    <p>Přidejte všechny členy vaší domácnosti a jejich případná omezení.</p>
+
+    <form id="household-form">
+        <input type="hidden" id="messenger-psid" name="messenger_psid">
+        
+        <div id="members-container">
+            </div>
+
+        <button type="button" id="add-member">Přidat dalšího člena</button>
+        <hr>
+        <button type="submit">Uložit domácnost</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
