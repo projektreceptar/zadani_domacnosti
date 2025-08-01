@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // DŮLEŽITÉ: Vložte sem vaši produkční URL z N8N workflow pro formulář!
-    const N8N_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook/867e19c8-5689-400a-b595-767f4ec31b3e'; 
+    const N8N_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook/867e19c8-5689-400a-b595-767f4ec31b3e'; // DŮLEŽITÉ: Doplňte později!
 
     const form = document.getElementById('household-form');
     const membersContainer = document.getElementById('members-container');
@@ -57,21 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
             data.members.push(member);
         });
 
-        // Odeslání dat do n8n s ladícími hláškami
+        // Odeslání dat do n8n
         try {
-            // Zobrazíme, co a kam posíláme
-            alert(`Odesílám data na:\n${N8N_WEBHOOK_URL}\n\nData:\n${JSON.stringify(data, null, 2)}`);
-
             await fetch(N8N_WEBHOOK_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
-            
-            // Zatím zakomentujeme zavření okna, abychom viděli výsledek
-            // window.close(); 
-            alert('Data byla úspěšně odeslána!');
-
+            // Krok 3: Zavření WebView po úspěšném odeslání
+            window.close();
         } catch (error) {
             console.error('Chyba při odesílání dat:', error);
             alert('Nastala chyba při ukládání. Zkuste to prosím znovu.');
