@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // === NASTAVENÍ ===
-    const SAVE_WEBHOOK_URL = 'URL_PRO_ULOZENI_ZASOB'; // Později doplníme
-    const AUTOCOMPLETE_WEBHOOK_URL = 'URL_PRO_NASEPTAVAC'; // Později doplníme
+    const SAVE_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook/4266ba51-73b1-401e-ab06-e57cdfb6ad09'; // Později doplníme
+    const AUTOCOMPLETE_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook/6d80d418-c417-477f-9867-bf3e6c1bb74c'; // Později doplníme
     // =================
 
     const form = document.getElementById('stock-form');
