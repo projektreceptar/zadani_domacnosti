@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naskladnění zásob</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .stock-item { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+        .stock-item input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .stock-item .name { flex-grow: 1; }
+        .stock-item .quantity { width: 80px; }
+        .stock-item .unit { width: 60px; }
+        .remove-btn { background: #ff4d4d; color: white; border: none; cursor: pointer; height: 35px; width: 35px; border-radius: 50%; font-weight: bold; }
+        button { background-color: #0084ff; color: white; border: none; cursor: pointer; padding: 12px; font-size: 16px; border-radius: 5px; margin-top: 10px; }
+        #add-item { background-color: #4CAF50; }
+    </style>
+</head>
+<body>
+    <h1>Domácí zásoby</h1>
+    <p>Zadejte potraviny, které máte aktuálně doma.</p>
+
+    <form id="stock-form">
+        <div id="items-container">
+            </div>
+        <button type="button" id="add-item">Přidat položku</button>
+        <hr>
+        <button type="submit">Uložit zásoby</button>
+    </form>
+
+    <script src="stock.js?v=1"></script>
+</body>
+</html>
