@@ -83,15 +83,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         try {
-            await fetch(SAVE_WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-                window.close();
-        } catch (error) {
-            alert(`Došlo k chybě při odesílání: ${error.message}`);
-            console.error('Chyba při odesílání dat:', error);
-        }
+    await fetch(SAVE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    
+    // Správný způsob zavření okna přes Messenger SDK
+    if (window.MessengerExtensions) {
+        MessengerExtensions.requestCloseBrowser(function success(){
+            // OK
+        }, function error(err) {
+            console.error(err);
+            // Fallback, pokud by SDK selhalo
+            window.close(); 
+        });
+    } else {
+        // Pro testování v běžném prohlížeči
+        window.close();
+    }
+
+} catch (error) {
+    alert(`Došlo k chybě při odesílání: ${error.message}`);
+    console.error('Chyba při odesílání dat:', error);
+}
     });
 });
