@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             await fetch(SAVE_WEBHOOK_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'text/plain' },
                 body: JSON.stringify(data)
             });
                 window.close();
