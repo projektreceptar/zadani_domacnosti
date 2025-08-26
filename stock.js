@@ -88,18 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
-            
-            // Zavření okna přes Messenger SDK
-            if (window.MessengerExtensions) {
-                MessengerExtensions.requestCloseBrowser(function success(){}, function error(err){
-                    console.error(err);
-                    window.close();
-                });
-            } else {
-                console.log("Messenger SDK nenalezeno, zkouším window.close()");
                 window.close();
-            }
-
         } catch (error) {
             alert(`Došlo k chybě při odesílání: ${error.message}`);
             console.error('Chyba při odesílání dat:', error);
