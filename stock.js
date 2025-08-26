@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // === NASTAVENÍ ===
-    const SAVE_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook/84bb9b70-241b-4832-b98e-006b75986fc9'; // Později doplníme
+    const SAVE_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook/4266ba51-73b1-401e-ab06-e57cdfb6ad09'; // Později doplníme
     const AUTOCOMPLETE_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook/6d80d418-c417-477f-9867-bf3e6c1bb74c'; // Později doplníme
     // =================
 
