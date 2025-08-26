@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let householdId; // Zde si uložíme ID domácnosti
 
-    // Získáme ID domácnosti z URL
-    const urlParams = new URLSearchParams(window.location.search);
-    householdId = urlParams.get('householdId');
-    if (!householdId) {
-        alert('Chyba: Chybí identifikátor domácnosti.');
-    }
+   // Získáme PSID z URL
+const urlParams = new URLSearchParams(window.location.search);
+const psid = urlParams.get('psid');
+if (!psid) {
+    alert('Chyba: Chybí identifikátor uživatele.');
+}
 
     const addItem = () => {
         const itemDiv = document.createElement('div');
@@ -59,12 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Odeslání formuláře
     form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+    event.preventDefault();
 
-        const data = {
-            household_id: parseInt(householdId),
-            stock: []
-        };
+    const data = {
+        messenger_psid: psid, // Posíláme psid místo household_id
+        stock: []
+    };
 
         const itemDivs = itemsContainer.querySelectorAll('.stock-item');
         itemDivs.forEach(div => {
