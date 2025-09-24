@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Získáme oba identifikátory z URL
     const urlParams = new URLSearchParams(window.location.search);
     psid = urlParams.get('psid');
-    householdId = urlParams.get('household_Id'); // TENTO ŘÁDEK CHYBĚL
+    householdId = urlParams.get('household_id'); // TENTO ŘÁDEK CHYBĚL
 
     if (!psid || !householdId) {
         alert('Chyba: Chybí identifikátor uživatele (psid) nebo domácnosti (householdId).');
