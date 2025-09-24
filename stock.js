@@ -8,16 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemsContainer = document.getElementById('items-container');
     const addItemBtn = document.getElementById('add-item');
 
-    let householdId; // Přejmenováno pro konzistenci
+    let household_id; // Přejmenováno pro konzistenci
     let ingredientsData = [];
 
     // Získáme oba identifikátory z URL
     const urlParams = new URLSearchParams(window.location.search);
     psid = urlParams.get('psid');
-    householdId = urlParams.get('household_id'); // TENTO ŘÁDEK CHYBĚL
+    household_id = urlParams.get('household_id'); // TENTO ŘÁDEK CHYBĚL
 
-    if (!psid || !householdId) {
-        alert('Chyba: Chybí identifikátor uživatele (psid) nebo domácnosti (householdId).');
+    if (!psid || !household_id) {
+        alert('Chyba: Chybí identifikátor uživatele (psid) nebo domácnosti (household_id).');
     }
 
     const addItem = () => {
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = {
             messenger_psid: psid, // Používáme PSID
-            household_id: parseInt(householdId),
+            household_id: parseInt(household_id),
             stock: []
         };
 
