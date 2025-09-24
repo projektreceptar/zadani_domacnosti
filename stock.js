@@ -8,14 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemsContainer = document.getElementById('items-container');
     const addItemBtn = document.getElementById('add-item');
 
-    let household_id; // Přidána proměnná pro householdId
+    let householdId; // Přejmenováno pro konzistenci
     let ingredientsData = [];
 
+    // Získáme oba identifikátory z URL
     const urlParams = new URLSearchParams(window.location.search);
-    // ZMĚNA: Používáme PSID, jak jsme se dohodli dříve
-    const psid = urlParams.get('psid'); 
-    if (!psid) {
-        alert('Chyba: Chybí identifikátor uživatele (psid).');
+    psid = urlParams.get('psid');
+    householdId = urlParams.get('householdId'); // TENTO ŘÁDEK CHYBĚL
+
+    if (!psid || !householdId) {
+        alert('Chyba: Chybí identifikátor uživatele (psid) nebo domácnosti (householdId).');
     }
 
     const addItem = () => {
@@ -75,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = {
             messenger_psid: psid, // Používáme PSID
-            household_id: household_id,
+            household_id: parseInt(householdId),
             stock: []
         };
 
