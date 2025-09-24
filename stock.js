@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const AUTOCOMPLETE_WEBHOOK_URL = 'https://jbzone.app.n8n.cloud/webhook/6d80d418-c417-477f-9867-bf3e6c1bb74c'; // Později doplníme
     // =================
 
-   const form = document.getElementById('stock-form');
+    const form = document.getElementById('stock-form');
     const itemsContainer = document.getElementById('items-container');
     const addItemBtn = document.getElementById('add-item');
 
