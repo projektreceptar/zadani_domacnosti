@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemsContainer = document.getElementById('items-container');
     const addItemBtn = document.getElementById('add-item');
 
-    let householdId;
+    let household_id; // Přidána proměnná pro householdId
     let ingredientsData = [];
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = {
             messenger_psid: psid, // Používáme PSID
-            household_id: household_Id,
+            household_id: household_id,
             stock: []
         };
 
