@@ -8,44 +8,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemsContainer = document.getElementById('items-container');
     const addItemBtn = document.getElementById('add-item');
 
-    let psid; // Zde si uložíme PSID uživatele
+    let householdId;
+    let ingredientsData = []; // Zde si uložíme kompletní seznam surovin i s jednotkami
 
-    // Získáme PSID z URL
     const urlParams = new URLSearchParams(window.location.search);
-    psid = urlParams.get('psid');
-    if (!psid) {
-        alert('Chyba: Chybí identifikátor uživatele (psid).');
+    householdId = urlParams.get('householdId');
+    if (!householdId) {
+        alert('Chyba: Chybí identifikátor domácnosti.');
     }
 
     const addItem = () => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'stock-item';
-        // Přidán atribut 'list' pro napojení na našeptávač
+        // ÚPRAVA: Přidán 'step="any"' pro desetinná čísla
         itemDiv.innerHTML = `
             <input type="text" class="name" placeholder="Název potraviny..." list="ingredients-datalist" required>
-            <input type="number" class="quantity" placeholder="Množství" required>
+            <input type="number" step="any" class="quantity" placeholder="Množství" required>
             <input type="text" class="unit" placeholder="Jednotka" value="ks" required>
             <button type="button" class="remove-btn">-</button>
         `;
         itemsContainer.appendChild(itemDiv);
+
+        const nameInput = itemDiv.querySelector('.name');
+        const unitInput = itemDiv.querySelector('.unit');
+
+        // NOVÁ FUNKCE: Automatické doplnění jednotky
+        nameInput.addEventListener('change', () => {
+            const selectedIngredient = ingredientsData.find(ing => ing.name === nameInput.value);
+            if (selectedIngredient && selectedIngredient.default_unit) {
+                unitInput.value = selectedIngredient.default_unit;
+            }
+        });
 
         itemDiv.querySelector('.remove-btn').addEventListener('click', () => {
             itemDiv.remove();
         });
     };
     
-    // Našeptávač
     const setupAutocomplete = async () => {
         try {
-            // Použijeme metodu POST, jak jsme se dohodli
             const response = await fetch(AUTOCOMPLETE_WEBHOOK_URL, { method: 'POST' });
-            if (!response.ok) {
-                 throw new Error(`Našeptávač vrátil chybu: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`Našeptávač vrátil chybu: ${response.status}`);
+            
             const ingredients = await response.json();
+            ingredientsData = ingredients; // Uložíme si kompletní data
             
             const datalist = document.createElement('datalist');
-            datalist.id = 'ingredients-datalist';
+datalist.id = 'ingredients-datalist';
             ingredients.forEach(ingredient => {
                 const option = document.createElement('option');
                 option.value = ingredient.name;
@@ -61,15 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
     addItemBtn.addEventListener('click', addItem);
     setupAutocomplete();
 
-    // Odeslání formuláře
+    // Odeslání formuláře (zůstává stejné)
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
-
         const data = {
-            messenger_psid: psid,
+            household_id: parseInt(householdId),
             stock: []
         };
-
         const itemDivs = itemsContainer.querySelectorAll('.stock-item');
         itemDivs.forEach(div => {
             const item = {
@@ -83,29 +90,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         try {
-    await fetch(SAVE_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    });
-    
-    // Správný způsob zavření okna přes Messenger SDK
-    if (window.MessengerExtensions) {
-        MessengerExtensions.requestCloseBrowser(function success(){
-            // OK
-        }, function error(err) {
-            console.error(err);
-            // Fallback, pokud by SDK selhalo
-            window.close(); 
-        });
-    } else {
-        // Pro testování v běžném prohlížeči
-        window.close();
-    }
-
-} catch (error) {
-    alert(`Došlo k chybě při odesílání: ${error.message}`);
-    console.error('Chyba při odesílání dat:', error);
-}
+            await fetch(SAVE_WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (window.MessengerExtensions) {
+                MessengerExtensions.requestCloseBrowser();
+            } else {
+                window.close();
+            }
+        } catch (error) {
+            alert(`Detailní chyba: ${error.message}`);
+        }
     });
 });
