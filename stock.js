@@ -107,8 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(`Server odpověděl s chybou: ${response.status} ${response.statusText}`);
             }
 
-            alert('Data byla úspěšně odeslána! Okno se nezavře, abychom viděli logy v konzoli.');
-            // window.close() je pro ladění dočasně vypnuto
+            alert('Data byla úspěšně odeslána!');
+            window.close();
 
         } catch (error) {
             alert(`Došlo k chybě, zkontrolujte konzoli (F12) pro detaily. Chyba: ${error.message}`);
