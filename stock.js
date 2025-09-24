@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = {
             messenger_psid: psid, // Používáme PSID
-            household_id: parseInt(householdId),
+            household_id: parseInt(household_Id),
             stock: []
         };
 
